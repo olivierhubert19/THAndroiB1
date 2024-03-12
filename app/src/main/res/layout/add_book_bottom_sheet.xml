@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/ColorWhite" />
+
+    <ImageView
+        android:id="@+id/ivDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/done"
+        android:src="@drawable/ic_done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/ColorWhite" />
+
+    <EditText
+        android:id="@+id/edtNameBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:autofillHints="title"
+        android:ellipsize="end"
+        android:hint="@string/name_book"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="@color/ColorWhite"
+        android:textColorHint="@color/ColorGray"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivBack" />
+
+    <LinearLayout
+        android:id="@+id/llDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtNameBook">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:autofillHints="dateTime"
+            android:drawablePadding="24dp"
+            android:ellipsize="end"
+            android:hint="@string/dateTime"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:textColor="@color/ColorWhite"
+            android:textColorHint="@color/ColorWhite"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvDateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:autofillHints="dateTime"
+            android:drawablePadding="24dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/ColorWhite"
+            android:textColorHint="@color/ColorGray"
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/ic_calendar" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llSubTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llDateTime">
+
+        <CheckBox
+            android:id="@+id/cb_science"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:buttonTint="@color/ColorGray"
+            android:text="@string/science"
+            android:textColor="@color/ColorGray"
+            android:textSize="16sp"
+
+            app:layout_constraintStart_toEndOf="@id/tv_name_book"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cb_novel"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:buttonTint="@color/ColorGray"
+            android:text="@string/novel"
+            android:textColor="@color/ColorGray"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/cb_science"
+            app:layout_constraintTop_toBottomOf="@id/cb_science" />
+
+        <CheckBox
+            android:id="@+id/cb_kid"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:buttonTint="@color/ColorGray"
+            android:text="@string/kid"
+            android:textColor="@color/ColorGray"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/cb_science"
+            app:layout_constraintTop_toBottomOf="@+id/cb_novel" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edtAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:autofillHints="desc"
+        android:hint="@string/name_author"
+        android:padding="10dp"
+        android:textColor="@color/ColorWhite"
+        android:textColorHint="@color/ColorGray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llSubTitle" />
+</androidx.constraintlayout.widget.ConstraintLayout>
