@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -22,7 +23,7 @@ import java.util.Calendar
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
-    private var listBook = ArrayList<Book>()
+    private val listBook = ArrayList<Book>()
     private lateinit var bookAdapter: BookAdapter
     override fun initView() {
         initFirstBook()
@@ -35,6 +36,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             btnAdd.setOnClickListener {
                 openAddBottomDialog(null)
             }
+
+            svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+                    searchBookByName(p0)
+                    return true
+                }
+
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    if (p0 == null || p0 == "") {
+                        searchBookByName(null)
+                    }
+                    return false
+                }
+            })
+        }
+    }
+
+    private fun searchBookByName(p: String?) {
+        if (p.isNullOrEmpty()) {
+            bookAdapter.setData(listBook)
+        } else {
+            val searchList = listBook.filter {
+                it.name.lowercase().contains(p.lowercase())
+            } as ArrayList
+            bookAdapter.setData(searchList)
         }
     }
 
@@ -139,16 +165,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private fun initBookAdapter() {
-        bookAdapter = BookAdapter(listBook, object : OnClickBook {
+        val cacheList = ArrayList<Book>()
+        cacheList.addAll(listBook)
+        bookAdapter = BookAdapter(cacheList, object : OnClickBook {
             override fun update(item: Book) {
                 openAddBottomDialog(item)
             }
-
-            override fun deleteBook(item: Book) {
-                listBook.remove(item)
-                bookAdapter.setData(listBook)
-            }
-
         })
         binding.rvTasks.adapter = bookAdapter
         val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {

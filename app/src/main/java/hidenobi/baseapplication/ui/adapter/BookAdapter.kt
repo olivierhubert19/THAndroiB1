@@ -9,7 +9,7 @@ import hidenobi.baseapplication.base.BaseViewHolder
 import hidenobi.baseapplication.databinding.ItemBookBinding
 import hidenobi.baseapplication.models.Book
 
-class BookAdapter(private var list: ArrayList<Book>, private val onClickBook: OnClickBook) :
+class BookAdapter(private val list: ArrayList<Book>, private val onClickBook: OnClickBook) :
     BaseRecyclerAdapter<Book>(list) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Book> {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,13 +38,13 @@ class BookAdapter(private var list: ArrayList<Book>, private val onClickBook: On
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(list: ArrayList<Book>) {
-        this.list = list
-        notifyDataSetChanged()
+    fun setData(newList: ArrayList<Book>) {
+        this.list.clear()
+        this.list.addAll(newList)
+        this.notifyDataSetChanged()
     }
 }
 
 interface OnClickBook {
     fun update(item: Book)
-    fun deleteBook(item: Book)
 }
