@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_item_book"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
@@ -15,17 +16,17 @@
 
         <TextView
             android:id="@+id/tv_name_book"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:maxEms="4"
             android:text="@string/name_s"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.4" />
 
         <CheckBox
             android:id="@+id/cb_science"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="32dp"
             android:enabled="false"
             android:text="@string/science"
@@ -34,7 +35,7 @@
 
         <CheckBox
             android:id="@+id/cb_novel"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="32dp"
             android:enabled="false"
             android:text="@string/novel"
@@ -43,7 +44,7 @@
 
         <CheckBox
             android:id="@+id/cb_kid"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="32dp"
             android:enabled="false"
             android:text="@string/kid"
@@ -52,22 +53,22 @@
 
         <TextView
             android:id="@+id/tv_author"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:maxEms="4"
             android:text="@string/author_s"
             app:layout_constraintBottom_toTopOf="@id/tv_year"
             app:layout_constraintStart_toEndOf="@id/cb_science"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.4" />
 
         <TextView
             android:id="@+id/tv_year"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:maxEms="4"
             android:text="@string/publication_date_s"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_author"
-            app:layout_constraintTop_toBottomOf="@id/tv_author" />
+            app:layout_constraintTop_toBottomOf="@id/tv_author"
+            app:layout_constraintWidth_percent="0.4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
