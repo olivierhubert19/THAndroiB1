@@ -1,13 +1,14 @@
 package hidenobi.baseapplication.ui.fragment
 
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import hidenobi.baseapplication.R
 import hidenobi.baseapplication.base.BaseFragment
@@ -106,8 +107,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private fun updateBook(newBook: Book) {
         val index = listBook.indexOf(newBook)
-        listBook[index] = newBook
-        bookAdapter.setData(listBook)
+        if (index < 0) {
+            showToast(R.string.update_fail)
+        } else {
+            listBook[index] = newBook
+            bookAdapter.setData(listBook)
+        }
     }
 
     private fun initFirstBook() {
@@ -146,6 +151,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         })
         binding.rvTasks.adapter = bookAdapter
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int {
+                return makeMovementFlags(
+                    ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+                    ItemTouchHelper.END or ItemTouchHelper.START
+                )
+            }
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                listBook.removeAt(position)
+                bookAdapter.setData(listBook)
+            }
+        })
+        itemTouchHelper.attachToRecyclerView(binding.rvTasks)
     }
 
     private fun showToast(@StringRes stringId: Int) {

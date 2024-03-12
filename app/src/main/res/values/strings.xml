@@ -17,4 +17,5 @@
     <string name="dateTime">Publication date</string>
     <string name="name_author">Name author</string>
     <string name="cannot_blank">Fields cannot be left blank</string>
+    <string name="update_fail">Update book fail</string>
 </resources>
