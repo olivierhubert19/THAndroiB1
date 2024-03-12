@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">BaseApplication</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="science">science</string>
+    <string name="novel">novel</string>
+    <string name="kid">kid</string>
+    <string name="author_s">Author: %s</string>
+    <string name="publication_date_s">Publication date: %s</string>
 </resources>
