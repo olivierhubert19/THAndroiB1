@@ -1,64 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardBackgroundColor="@color/ColorWhite"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="6dp">
 
-    <TextView
-        android:id="@+id/tv_name_book"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="6dp">
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_name_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxEms="4"
+            android:text="@string/name_s"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/cb_science"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="@string/science"
-        app:layout_constraintEnd_toStartOf="@id/tv_author"
-        app:layout_constraintStart_toEndOf="@id/tv_name_book"
-        app:layout_constraintTop_toTopOf="parent" />
+        <CheckBox
+            android:id="@+id/cb_science"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:enabled="false"
+            android:text="@string/science"
+            app:layout_constraintStart_toEndOf="@id/tv_name_book"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/cb_novel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="@string/novel"
-        app:layout_constraintStart_toStartOf="@id/cb_science"
-        app:layout_constraintTop_toBottomOf="@id/cb_science" />
+        <CheckBox
+            android:id="@+id/cb_novel"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:enabled="false"
+            android:text="@string/novel"
+            app:layout_constraintStart_toStartOf="@id/cb_science"
+            app:layout_constraintTop_toBottomOf="@id/cb_science" />
 
-    <CheckBox
-        android:id="@+id/cb_kid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="@string/kid"
-        app:layout_constraintStart_toStartOf="@id/cb_science"
-        app:layout_constraintTop_toBottomOf="@+id/cb_novel" />
+        <CheckBox
+            android:id="@+id/cb_kid"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:enabled="false"
+            android:text="@string/kid"
+            app:layout_constraintStart_toStartOf="@id/cb_science"
+            app:layout_constraintTop_toBottomOf="@+id/cb_novel" />
 
-    <TextView
-        android:id="@+id/tv_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/author_s"
-        app:layout_constraintBottom_toTopOf="@id/tv_year"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/cb_science"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxEms="4"
+            android:text="@string/author_s"
+            app:layout_constraintBottom_toTopOf="@id/tv_year"
+            app:layout_constraintStart_toEndOf="@id/cb_science"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/publication_date_s"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/tv_author"
-        app:layout_constraintStart_toStartOf="@id/tv_author"
-        app:layout_constraintTop_toBottomOf="@id/tv_author" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxEms="4"
+            android:text="@string/publication_date_s"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_author"
+            app:layout_constraintTop_toBottomOf="@id/tv_author" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
