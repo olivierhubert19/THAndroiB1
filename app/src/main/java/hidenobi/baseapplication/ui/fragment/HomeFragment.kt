@@ -13,17 +13,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import hidenobi.baseapplication.R
 import hidenobi.baseapplication.base.BaseFragment
-import hidenobi.baseapplication.databinding.AddBookBottomSheetBinding
+import hidenobi.baseapplication.databinding.AddPlayerBottomSheetBinding
 import hidenobi.baseapplication.databinding.FragmentHomeBinding
-import hidenobi.baseapplication.models.Book
+import hidenobi.baseapplication.models.Gender
+import hidenobi.baseapplication.models.Player
 import hidenobi.baseapplication.ui.activity.HomeViewModel
 import hidenobi.baseapplication.ui.adapter.BookAdapter
 import hidenobi.baseapplication.ui.adapter.OnClickBook
+import java.time.LocalDate
+import java.time.ZoneOffset
 import java.util.Calendar
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
-    private val listBook = ArrayList<Book>()
+    private val listPlayer = ArrayList<Player>()
     private lateinit var bookAdapter: BookAdapter
     override fun initView() {
         initFirstBook()
@@ -55,17 +58,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private fun searchBookByName(p: String?) {
         if (p.isNullOrEmpty()) {
-            bookAdapter.setData(listBook)
+            bookAdapter.setData(listPlayer)
         } else {
-            val searchList = listBook.filter {
+            val searchList = listPlayer.filter {
                 it.name.lowercase().contains(p.lowercase())
             } as ArrayList
             bookAdapter.setData(searchList)
         }
     }
 
-    private fun openAddBottomDialog(book: Book?) {
-        val bottomBinding = AddBookBottomSheetBinding.inflate(layoutInflater)
+    private fun openAddBottomDialog(player: Player?) {
+        val bottomBinding = AddPlayerBottomSheetBinding.inflate(layoutInflater)
         val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
         bottomSheetDialog.setContentView(bottomBinding.root)
         bottomSheetDialog.setOnShowListener {
@@ -74,34 +77,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 ?: return@setOnShowListener
             bs.setBackgroundColor(Color.TRANSPARENT)
         }
-        book?.let {
+        player?.let {
             bottomBinding.apply {
-                edtNameBook.setText(it.name)
-                tvDateTime.text = it.publishedDate
-                edtAuthor.setText(it.author)
-                cbScience.isChecked = it.isScience
-                cbNovel.isChecked = it.isNovel
-                cbKid.isChecked = it.isKid
+                edtName.setText(it.name)
+                tvDateTime.text = it.birthday
+                cbDefender.isChecked = it.isDefender
+                cbMidfielder.isChecked = it.isMidfielder
+                cbStriker.isChecked = it.isStriker
+                if (it.gender == Gender.MALE) {
+                    rbFemale.isChecked = false
+                    rbMale.isChecked = true
+                } else {
+                    rbFemale.isChecked = true
+                    rbMale.isChecked = false
+                }
             }
         }
         bottomBinding.apply {
             ivDone.setOnClickListener {
-                val name = edtNameBook.text.toString()
-                val author = edtAuthor.text.toString()
+                val name = edtName.text.toString()
                 val date = tvDateTime.text.toString()
-                val isNovel = cbNovel.isChecked
-                val isKid = cbKid.isChecked
-                val isScience = cbScience.isChecked
-                val id = book?.id ?: System.currentTimeMillis()
+                val isDefender = cbDefender.isChecked
+                val isMidfielder = cbMidfielder.isChecked
+                val isStriker = cbStriker.isChecked
+                val id = player?.id ?: System.currentTimeMillis()
+                val gender = if (rbFemale.isChecked) Gender.FEMALE else Gender.MALE
                 val color = if (id % 2 == 0L) R.color.ColorBlur else R.color.ColorLightYellow
-                if (name.isEmpty() || author.isEmpty() || date.isEmpty()) {
+                if (name.isEmpty() || date.isEmpty()) {
                     showToast(R.string.cannot_blank)
+                } else if (!isDefender && !isMidfielder && !isStriker) {
+                    showToast(R.string.must_choose_position)
                 } else {
-                    val newBook = Book(name, author, date, isScience, isNovel, isKid, color, id)
-                    if (book == null) {
-                        saveBook(newBook)
+                    val newPlayer =
+                        Player(name, date, gender, isDefender, isMidfielder, isStriker, color, id)
+                    if (player == null) {
+                        saveBook(newPlayer)
                     } else {
-                        updateBook(newBook)
+                        updateBook(newPlayer)
                     }
                     bottomSheetDialog.dismiss()
                 }
@@ -114,9 +126,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 val datePickerDialog = DatePickerDialog(
                     requireContext(),
                     { _, year, monthOfYear, dayOfMonth ->
-                        tvDateTime.text =
-                            dayOfMonth.toString().plus("/").plus((monthOfYear + 1).toString())
-                                .plus("/").plus(year.toString())
+                        val chooseTime = LocalDate.of(year, monthOfYear + 1, dayOfMonth)
+                        val chooseMillisecond =
+                            chooseTime.atStartOfDay().toInstant(ZoneOffset.UTC).toEpochMilli()
+                        if (chooseMillisecond > System.currentTimeMillis()) {
+                            showToast(R.string.birthday_fail)
+                        } else {
+                            tvDateTime.text =
+                                dayOfMonth.toString().plus("/").plus((monthOfYear + 1).toString())
+                                    .plus("/").plus(year.toString())
+                        }
                     }, mYear, mMonth, mDay
                 )
                 datePickerDialog.show()
@@ -126,49 +145,49 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         bottomSheetDialog.show()
     }
 
-    private fun saveBook(newBook: Book) {
-        listBook.add(newBook)
-        bookAdapter.setData(listBook)
+    private fun saveBook(newPlayer: Player) {
+        listPlayer.add(newPlayer)
+        bookAdapter.setData(listPlayer)
     }
 
-    private fun updateBook(newBook: Book) {
-        val index = listBook.indexOf(newBook)
+    private fun updateBook(newPlayer: Player) {
+        val index = listPlayer.indexOf(newPlayer)
         if (index < 0) {
             showToast(R.string.update_fail)
         } else {
-            listBook[index] = newBook
-            bookAdapter.setData(listBook)
+            listPlayer[index] = newPlayer
+            bookAdapter.setData(listPlayer)
         }
     }
 
     private fun initFirstBook() {
-        listBook.add(
-            Book(
-                name = "Alice in wonderland",
-                author = "David",
-                publishedDate = "12/07/2002",
+        listPlayer.add(
+            Player(
+                name = "David",
+                gender = Gender.MALE,
+                birthday = "12/07/2002",
                 color = R.color.ColorLightYellow,
-                isNovel = true,
+                isMidfielder = true,
                 id = 1
             )
         )
-        listBook.add(
-            Book(
-                name = "Harry potter",
-                author = "JK",
-                publishedDate = "12/07/1996",
+        listPlayer.add(
+            Player(
+                name = "JK",
+                birthday = "12/07/1996",
+                gender = Gender.FEMALE,
                 color = R.color.ColorBlur,
-                isNovel = true,
+                isDefender = true,
                 id = 2
             )
         )
     }
 
     private fun initBookAdapter() {
-        val cacheList = ArrayList<Book>()
-        cacheList.addAll(listBook)
+        val cacheList = ArrayList<Player>()
+        cacheList.addAll(listPlayer)
         bookAdapter = BookAdapter(cacheList, object : OnClickBook {
-            override fun update(item: Book) {
+            override fun update(item: Player) {
                 openAddBottomDialog(item)
             }
         })
@@ -194,8 +213,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                listBook.removeAt(position)
-                bookAdapter.setData(listBook)
+                listPlayer.removeAt(position)
+                bookAdapter.setData(listPlayer)
             }
         })
         itemTouchHelper.attachToRecyclerView(binding.rvTasks)

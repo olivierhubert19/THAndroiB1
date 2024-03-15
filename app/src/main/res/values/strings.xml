@@ -18,4 +18,16 @@
     <string name="name_author">Name author</string>
     <string name="cannot_blank">Fields cannot be left blank</string>
     <string name="update_fail">Update book fail</string>
+    <string name="my_player">My players</string>
+    <string name="defender">Defender</string>
+    <string name="midfielder">Midfielder</string>
+    <string name="gender_s">Gender: %s</string>
+    <string name="birthday_s">Birthday: %s</string>
+    <string name="striker">Striker</string>
+    <string name="name_player">Name player</string>
+    <string name="birthday">Birthday</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="must_choose_position">Must choose position</string>
+    <string name="birthday_fail">Invalid date of birth</string>
 </resources>

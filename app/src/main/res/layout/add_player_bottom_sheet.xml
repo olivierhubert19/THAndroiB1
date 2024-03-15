@@ -30,13 +30,13 @@
         app:tint="@color/ColorWhite" />
 
     <EditText
-        android:id="@+id/edtNameBook"
+        android:id="@+id/edtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:autofillHints="title"
         android:ellipsize="end"
-        android:hint="@string/name_book"
+        android:hint="@string/name_player"
         android:inputType="text"
         android:maxLines="1"
         android:padding="10dp"
@@ -55,7 +55,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtNameBook">
+        app:layout_constraintTop_toBottomOf="@id/edtName">
 
         <TextView
             android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
             android:autofillHints="dateTime"
             android:drawablePadding="24dp"
             android:ellipsize="end"
-            android:hint="@string/dateTime"
+            android:hint="@string/birthday"
             android:maxLines="1"
             android:paddingStart="10dp"
             android:paddingEnd="0dp"
@@ -98,52 +98,56 @@
         app:layout_constraintTop_toBottomOf="@id/llDateTime">
 
         <CheckBox
-            android:id="@+id/cb_science"
+            android:id="@+id/cb_defender"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:buttonTint="@color/ColorGray"
-            android:text="@string/science"
+            android:text="@string/defender"
             android:textColor="@color/ColorGray"
-            android:textSize="16sp"
-
-            app:layout_constraintStart_toEndOf="@id/tv_name_book"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="16sp" />
 
         <CheckBox
-            android:id="@+id/cb_novel"
+            android:id="@+id/cb_midfielder"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:buttonTint="@color/ColorGray"
-            android:text="@string/novel"
+            android:text="@string/midfielder"
             android:textColor="@color/ColorGray"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/cb_science"
-            app:layout_constraintTop_toBottomOf="@id/cb_science" />
+            android:textSize="16sp" />
 
         <CheckBox
-            android:id="@+id/cb_kid"
+            android:id="@+id/cb_striker"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:buttonTint="@color/ColorGray"
-            android:text="@string/kid"
+            android:text="@string/striker"
             android:textColor="@color/ColorGray"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/cb_science"
-            app:layout_constraintTop_toBottomOf="@+id/cb_novel" />
+            android:textSize="16sp" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/edtAuthor"
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:autofillHints="desc"
-        android:hint="@string/name_author"
         android:padding="10dp"
-        android:textColor="@color/ColorWhite"
-        android:textColorHint="@color/ColorGray"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llSubTitle" />
+        app:layout_constraintTop_toBottomOf="@id/llSubTitle">
+
+        <RadioButton
+            android:id="@+id/rb_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/ColorGray"
+            android:checked="true"
+            android:text="@string/male"
+            android:textColor="@color/ColorGray"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rb_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/ColorGray"
+            android:text="@string/female"
+            android:textColor="@color/ColorGray"
+            android:textSize="16sp" />
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

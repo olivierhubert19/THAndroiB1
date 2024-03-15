@@ -14,61 +14,64 @@
         android:layout_height="match_parent"
         android:padding="6dp">
 
+        <ImageView
+            android:id="@+id/iv_avt"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_women"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:id="@+id/tv_name_book"
+            android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/name_s"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_avt"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.4" />
+            app:layout_constraintWidth_percent="0.2" />
 
         <CheckBox
-            android:id="@+id/cb_science"
+            android:id="@+id/cb_defender"
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:enabled="false"
-            android:text="@string/science"
-            app:layout_constraintStart_toEndOf="@id/tv_name_book"
+            android:text="@string/defender"
+            app:layout_constraintStart_toEndOf="@id/tv_name"
             app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox
-            android:id="@+id/cb_novel"
+            android:id="@+id/cb_midfielder"
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:enabled="false"
-            android:text="@string/novel"
-            app:layout_constraintStart_toStartOf="@id/cb_science"
-            app:layout_constraintTop_toBottomOf="@id/cb_science" />
+            android:text="@string/midfielder"
+            app:layout_constraintStart_toStartOf="@id/cb_defender"
+            app:layout_constraintTop_toBottomOf="@id/cb_defender" />
 
         <CheckBox
-            android:id="@+id/cb_kid"
+            android:id="@+id/cb_striker"
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:enabled="false"
-            android:text="@string/kid"
-            app:layout_constraintStart_toStartOf="@id/cb_science"
-            app:layout_constraintTop_toBottomOf="@+id/cb_novel" />
+            android:text="@string/striker"
+            app:layout_constraintStart_toStartOf="@id/cb_defender"
+            app:layout_constraintTop_toBottomOf="@+id/cb_midfielder" />
 
-        <TextView
-            android:id="@+id/tv_author"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/author_s"
-            app:layout_constraintBottom_toTopOf="@id/tv_year"
-            app:layout_constraintStart_toEndOf="@id/cb_science"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.4" />
 
         <TextView
             android:id="@+id/tv_year"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/publication_date_s"
+            android:layout_marginStart="12dp"
+            android:text="@string/birthday_s"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_author"
-            app:layout_constraintTop_toBottomOf="@id/tv_author"
-            app:layout_constraintWidth_percent="0.4" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cb_defender"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
